@@ -12,7 +12,7 @@ public class UserDao {
 	public boolean addUser(User user) {
 
 		// INSERT文の準備
-		String sql = "INSERT INTO user(user,pass,name) VALUES (?,?,?)";
+		String sql = "INSERT INTO m_user(username,pass,name) VALUES (?,?,?)";
 
 		// データベース接続
 		try (Connection conn = ConnectionManager.getConnection();
@@ -42,7 +42,7 @@ public class UserDao {
 	public User login(User user) {
 
 		// SELECT文の準備
-		String sql = "SELECT * FROM user WHERE user = ? AND pass = ?";
+		String sql = "SELECT * FROM m_user WHERE username = ? AND pass = ?";
 
 		// データベース接続
 		try (Connection conn = ConnectionManager.getConnection();
@@ -59,7 +59,7 @@ public class UserDao {
 			if (res.next()) {
 				User resUser = new User();
 				resUser.setId(res.getInt("id"));
-				resUser.setUser(res.getString("user"));
+				resUser.setUser(res.getString("username"));
 				resUser.setPass(res.getString("pass"));
 				resUser.setName(res.getString("name"));
 				return resUser;
